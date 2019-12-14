@@ -31,7 +31,7 @@ Then to deploy the app, press 'Publish', and selet 'Deploy as Web App'. Then in 
 
 Once you've hit the 'Deploy' button, you'll be given a URL which looks something like: `https://script.google.com/macros/s/...`
 
-This is the URL you'll need to send a HTTP Post request to. The body of the request should be in `www-form-urlencoded` format with 3 parameters:
+This is the URL you'll need to send a HTTP Post request to. The body of the request should be in `www-form-urlencoded` format with 3 parameters:  
 `address` - The email address to send the email to  
 `subject` - The subject of the email  
 `message` - The message (in html format) to send
