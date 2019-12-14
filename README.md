@@ -13,7 +13,7 @@ This script acts as a HTTP Post endpoint and sends an email from your gmail addr
 
 ## Set Boolean
 
-This consists of 3 scripts. One sets a value in a Google Spreadsheet to true, another sets the value to false. A third script simply retrieves the value. Both act as HTTP Endpoints.
+This consists of 2 scripts. One sets a value in a Google Spreadsheet to true or false, the other simply retrieves the value. Both act as HTTP Endpoints.
 
 This has a variety of uses. For example, when I want to turn on my PC when I'm away from home, I can use my phone to set the value to true. I have a raspberry pi which calls the retreive endpoint regularily. As soon as it sees a 'true', it sets the value back to false and sends a Wake on Lan packet to my PC to turn it on. (This avoids forwarding a http port to my pi)
 

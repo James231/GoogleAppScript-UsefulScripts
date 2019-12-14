@@ -8,7 +8,7 @@ var YOUR_EMAIL_ADDRESS = "Your Name";
 
 // This must be set to the ID of a Google Spreadsheet where you want contact form entries to be added.
 //   You can find the ID of a spreadsheet by temporarily enabling a sharing link (the id is the string after the last "/" in the link url)
-var SPREADSHEET_ID = "PREADSHEET_ID";
+var SPREADSHEET_ID = "SPREADSHEET_ID";
 
 
 /*
