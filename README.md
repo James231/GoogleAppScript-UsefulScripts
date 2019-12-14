@@ -1,5 +1,5 @@
 # Google Apps Script - Useful Scripts
-Here are some useful Google App Script scripts which you can copy deploy through Google Drive.
+Here are some useful Google Apps Script scripts which you can copy deploy through Google Drive.
 
 I may add to this in the future. Please open pull requests if you have your own scripts you want to add.
 
