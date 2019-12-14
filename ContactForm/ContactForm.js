@@ -19,6 +19,7 @@ var SPREADSHEET_ID = "PREADSHEET_ID";
 		And if SEND_EMAILS is true, an email will be sent to your address with the provided information.
 
 	For more info see:
+	https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/ContactForm
 */
 
 function doPost (e) {

@@ -13,6 +13,7 @@ var REPLY_TO_ADDRESS = "";
 		which will form an email that will be sent (from your gmail address).
 
 	For more info see:
+	https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/SendEmail
 */
 
 function doPost (e) {

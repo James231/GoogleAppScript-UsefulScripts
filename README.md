@@ -9,7 +9,7 @@ Note: The scripts for sending emails will not work on a large scale (especially 
 
 This script acts as a HTTP Post endpoint and sends an email from your gmail address, when you provide it with a recipient address, subject, and HTML body.
 
-[See how to use it here.]()
+[See how to use it here.](https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/SendEmail)
 
 ## Set Boolean
 
@@ -17,13 +17,13 @@ This consists of 3 scripts. One sets a value in a Google Spreadsheet to true, an
 
 This has a variety of uses. For example, when I want to turn on my PC when I'm away from home, I can use my phone to set the value to true. I have a raspberry pi which calls the retreive endpoint regularily. As soon as it sees a 'true', it sets the value back to false and sends a Wake on Lan packet to my PC to turn it on. (This avoids forwarding a http port to my pi)
 
-[See how to use it here.]()
+[See how to use it here.](https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/SetBoolean)
 
 ## Contact Form Submission
 
 If you want to put a contact form on a static website, where you can't post the values to a php/node/go/dotnet backend, post the values to this Google Apps Script endpoint instead. It will log all entries in a Google Spreadsheet, and send you an email whenever someone submits something.
 
-[See how to use it here.]()
+[See how to use it here.](https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/ContactForm)
 
 ## License
 
