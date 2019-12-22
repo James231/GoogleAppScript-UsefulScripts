@@ -25,6 +25,12 @@ If you want to put a contact form on a static website, where you can't post the 
 
 [See how to use it here.](https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/ContactForm)
 
+## Email Subscription
+
+Similar to the above example, if you want a 'subscribe to our mailing list' option on your static website you can use these endpoints instead. All email addresses submitted get logged on a Google Spreadsheet (without repeating any).
+
+[See how to use it here.](https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/EmailSubscription)
+
 ## License
 
 All scripts are released under MIT license so you can use them for anything you like, for both personal and commercial use.
