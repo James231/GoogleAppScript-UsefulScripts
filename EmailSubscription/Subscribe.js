@@ -32,9 +32,9 @@ function doPost (e) {
 	var values = range.getValues();
 	var numRows = range.getNumRows();
 	for (i = 0; i < numRows; i++) {
-	  if (values[i][0] == emailAddress) {
-	  	return ContentService.createTextOutput("Duplicate");
-	  }
+		if (values[i][0] == emailAddress) {
+			return ContentService.createTextOutput("Duplicate");
+		}
 	} 
 
 	sheet.appendRow([emailAddress]);
@@ -46,8 +46,8 @@ function doPost (e) {
 /*
 	Checks email address string against regular expression and returns a bool.
 	Source: https://stackoverflow.com/a/46181
- */
+*/
 function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(String(email).toLowerCase());
 }
