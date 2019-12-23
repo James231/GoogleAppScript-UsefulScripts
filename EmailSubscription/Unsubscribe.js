@@ -7,17 +7,27 @@ var SPREADSHEET_ID = "SPREADSHEET_ID";
 
 
 /*
-	When deployed as a Google Script Web App this code will wait for a HTTP POST request.
-	When a HTTP POST request is received the code will be executed.
+	When deployed as a Google Script Web App this code will wait for a HTTP POST or GET request.
+	When a HTTP POST or GET request is received the code will be executed.
 	The request will provide it with an email address as a form parameter.
 	The email will be checked against a regular expression to make sure it is in a valid format.
-	Then it will be added to the spreadsheet if it is not already present.
+	Then it will be removed from the mailing list if it is present.
 	
 	For more info see:
 	https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/EmailSubscription
 */
 
+function doGet (e) {
+	var emailAddress = "" + e.parameters.email;
+	return unsubscribe(emailAddress);
+}
+
 function doPost (e) {
+	var emailAddress = "" + e.parameters.email;
+	return unsubscribe(emailAddress);
+}
+
+function unsubscribe(emailAddress) {
 	var emailAddress = "" + e.parameters.email;
 	emailAddress = emailAddress.toLowerCase().trim();
 
@@ -25,7 +35,8 @@ function doPost (e) {
 		return ContentService.createTextOutput("Bad Regex");
 	}
 
-	// Open spreadsheet and check against existing email addresses
+	// Open spreadsheet and look for email addresses
+	var foundRowNum = -1;
 	var spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
 	var sheet = spreadsheet.getSheets()[0];
 	var range = sheet.getDataRange();
@@ -33,13 +44,16 @@ function doPost (e) {
 	var numRows = range.getNumRows();
 	for (i = 0; i < numRows; i++) {
 		if (values[i][0] == emailAddress) {
-			return ContentService.createTextOutput("Duplicate");
+			foundRowNum = i;
 		}
-	} 
+	}
 
-	sheet.appendRow([emailAddress]);
+	if (foundRowNum == -1) {
+		return ContentService.createTextOutput("Not Found");
+	}
 
-	return ContentService.createTextOutput("Success");
+	sheet.deleteRow(foundRowNum + 1);
+	return ContentService.createTextOutput("Successfully Unsubscribed");
 }
 
 

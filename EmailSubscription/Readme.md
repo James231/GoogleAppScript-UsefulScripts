@@ -2,15 +2,19 @@
 
 ## Description
 
-This has a single HTTP endpoint. You provide it with an email address and it adds the address to a Google Spreadsheet if it isn't already present.
+This directory has 2 GAS scripts which are both HTTP enpoints:  
+`Subscibe.js`- This is the main one. Give it an email address and it will add the address to a Mailing List stored on a Google Spreadsheet   
+`Unsubscribe.js` - Give this an email address and will remove the address from the spreadsheet if present.
 
-You can use this endpoint on a website to give your users a 'subscribe to our emails' option.
+You can use the `Subscibe` endpoint on a website to give your users a 'subscribe to our mailing list' option. It can be called by client-side JavaScript code when the user submits their address.
 
-The script also checks the email addresses match a standard email regex format.
+The `Unsubscribe` script could be linked to from within an email. It could provide the user's email to the script as a URL parameter, so when the user clicks on the link the script executes (after a GET request was sent) which removes their email from the list.
+
+The scripts also checks the provided email addresses match a standard email regex format.
 
 ## Important Values to Change
 
-There is one value you need to set in the `Subscibe.js` script in this directory, which is the `SPREADSHEET_ID`.
+There is one value you need to set in both scripts, which is the `SPREADSHEET_ID`.
 
 This should be the id of the spreadsheet where the list will be stored.
 
@@ -21,9 +25,9 @@ The emails will be stored in the first sheet going down the first column.
 
 ## How to Deploy
 
-To deploy the script first login to your Google Account and navigate to Google Drive. 
+To deploy the scripts first login to your Google Account and navigate to Google Drive.
 
-If you haven't used Google Apps Script before, you'll need to connect the app to your Google Drive account. Press the 'New' button, select 'More' and press '+ Connect More Apps'. Then enter 'Google Apps Script' into the search field and select '+ Connect'.
+If you haven't used Google Apps Script before, you'll need to connect the app to your Google Drive account. Press the 'New' button, select 'More' and press '+ Connect More Apps'. Then enter 'Google Apps Script' into the search field and select '+ Connect'. For each script follow the instructions below:
 
 In Google Drive press 'New', then 'More', and select 'Google Apps Script'. In the top left, select 'Untitled Project' and enter a new name for the project e.g. 'Send Email Script'. (The name just appears in Google Drive and does not matter).
 
@@ -35,12 +39,14 @@ Once you've hit the 'Deploy' button, you'll be given a URL which looks something
 
 ## How to Use
 
-To use the script simply send a HTTP POST request to the endpoint URL. The post request needs to include form data. This form data should be a single field with key 'email' and the value as the email address you want to add to the mailing list.
+To use the Subscribe script simply send a HTTP POST request to the endpoint URL. The post request needs to include form data. This form data should be a single field with key 'email' and the value as the email address you want to add to the mailing list.
 
 The response body will be in plaintext and will consist of one of the following:  
 `Success` - The email was added to the mailing list  
 `Duplicate` - The email has already been added to the mailing list  
 `Bad Regex` - The format of the email was not valid  
+
+To use the Unsubscribe script you can do exactly the same (sent POST request with `email` parameter). And the output will either be `Bad Regex`, `Not Found` or `Successfully Unsubscribed`. You can also use a GET request if you put the parameter in the URL. i.e. Your URL should look like: `https://script.google.com/macros/s/...?email=john@example.com` (you may need to URL encode the actual address). This email could be given to a user in an email, allowing them to unsubscribe when they click the link.
 
 To test the code I recommend you try [Curl It](https://curlit.jam-es.com). Set the method to POST, enter the URL, allow at least 1 redirect, and add the `email` parameter.
 
