@@ -6,7 +6,7 @@ If you want to put a contact form on a static website, where you can't post the 
 
 ## Important Values to Change
 
-The code you need is within the `ContactForm.js` file in this directory.
+The code you need is within the `ContactForm.js` file in this directory. (Unless you want to use ReCaptcha in which case see the section at the end)
 
 When copying the code into Google Drive make sure you set the following values at the top of the file:
 
@@ -47,3 +47,42 @@ To test the code I recommend you try [Curl It](https://curlit.jam-es.com). Set t
 You can also test the code using a more complete HTTP Client like [Postman](https://www.getpostman.com/). Using Postman, create a new request, simply set the URL to your endpoint URL, set the HTTP Method to POST, and in the Body tab select `x-www-form-urlencoded` and enter the 3 keys listed above with appropriate values.
 
 Note: Google Apps Script endpoints will return a 301 and redirect you to the response page. So if you want to check the response, make sure you allow redirects in your HTTP Client or code.
+
+Important: If an invalid email address is submitted a body containing just the string `Invalid Email` will be returned. The email is checked using a regular expression. See the code for full implementation.
+
+
+## Using ReCaptcha V2
+
+To use ReCaptcha do the same as above but use the `ContactForm_WithReCaptcha.js` instead.
+
+You can find the developer documentation for ReCaptcha V2 [here](https://developers.google.com/recaptcha/docs/display).
+
+When registering your site to use ReCaptcha, you will be given a website secret. Use this as the `RECAPTHCA_SECRET` variable within the `ContactForm_WithReCaptcha.js` file.
+
+I assume you understand how to implement this on your website. Before sending the contact form request in javascript you need to retrieve the completed recaptcha token. This needs to be submitted as the `token` parameter in the request to GAS.
+
+As a very basic guide, your website code might look something like this when the form is submitted:
+```
+...
+var recaptchaCompletedToken = grecaptcha.getResponse();
+...
+if (recaptchaCompletedToken == "") {
+    ShowError("Captcha not completed!");
+    return;
+}
+...
+function HandleResponse(body) {
+    ...
+    if (body == "Invalid Captcha") {
+        showError("Captcha not valid. Try again.");
+        return;
+    }
+    ...
+}
+...
+var xhr = new XMLHttpRequest();
+xhr.open("POST", endpointUrl, true);
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+xhr.onreadystatechange = HandleResponse;
+xhr.send("full_name=" + encodeURIComponent(fullname) + "&email=" + encodeURIComponent(email) + "&message=" + encodeURIComponent(message) + "&token=" + encodeURIComponent(recaptchaCompletedToken));
+```

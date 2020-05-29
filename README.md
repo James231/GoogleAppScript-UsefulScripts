@@ -23,6 +23,8 @@ This has a variety of uses. For example, when I want to turn on my PC when I'm a
 
 If you want to put a contact form on a static website, where you can't post the values to a php/node/go/dotnet backend, post the values to this Google Apps Script endpoint instead. It will log all entries in a Google Spreadsheet, and send you an email whenever someone submits something.
 
+There is also code for using Google's ReCaptcha. I only provide the Google Apps Script code and assume you can figure out the client side code yourself.
+
 [See how to use it here.](https://github.com/James231/GoogleAppScript-UsefulScripts/tree/master/ContactForm)
 
 ## Email Subscription

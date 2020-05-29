@@ -30,6 +30,10 @@ function doPost (e) {
 	// Check none of the data is empty
 	if ((full_name) && (email) && (message)) {
 
+		if (!validateEmail(email)) {
+            return ContentService.createTextOutput("Invalid Email");
+        }
+
 		// Send email if enabled
 		if (SEND_EMAILS) {
 			var emailMessage = "Someone has submitted a contact form on your website!\n\nFull Name: " + full_name + "\n\nEmail: " + email + "\n\nMessage:\n" + message;
@@ -45,4 +49,13 @@ function doPost (e) {
 	}
 
 	return ContentService.createTextOutput("Error");
+}
+
+/*
+  Checks email address string against regular expression and returns a bool.
+  Source: https://stackoverflow.com/a/46181
+*/
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
 }
