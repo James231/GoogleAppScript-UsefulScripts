@@ -5,6 +5,8 @@ I may add to this in the future. Please open pull requests if you have your own 
 
 Note: The scripts for sending emails will not work on a large scale (especially if deployed through free Gmail accounts) as there are limits of how many emails you can send, which you might hit quite quickly.
 
+(Optional) [Take a look at this corresponding blog post to see how to use GAS and this repo.](http://blog.jam-es.com/2019/12/google-apps-script-introduction-with.html)
+
 ## Send Email
 
 This script acts as a HTTP Post endpoint and sends an email from your gmail address, when you provide it with a recipient address, subject, and HTML body.
